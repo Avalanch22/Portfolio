@@ -1,0 +1,222 @@
+.skillsSection {
+  padding: 8rem 0;
+  background-color: var(--bg-primary); 
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .skillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Spotlight Card Strategy */
+.skillCategory {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.skillCategory::before,
+.skillCategory::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+
+.skillCategory::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  z-index: 1;
+}
+
+.skillCategory::after {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(59, 130, 246, 0.5),
+    transparent 40%
+  );
+  z-index: 3;
+}
+
+.skillsGrid:hover .skillCategory::after {
+  opacity: 1;
+}
+.skillCategory:hover::before {
+  opacity: 1;
+}
+
+.cardContent {
+  background-color: var(--bg-secondary);
+  border-radius: inherit;
+  margin: 1px; 
+  padding: 2.5rem;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 2px); 
+}
+
+.categoryTitle {
+  font-family: var(--font-syncopate);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+}
+
+.skillsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+/* Individual Skill Item */
+.skillItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: scale(0.6) translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.skillItem.animateIn {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.iconWrapper {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.skillName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  transition: all 0.3s;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Hover effect */
+.skillItem.animateIn:hover {
+  transform: translateY(-8px) scale(1.05);
+  transition-delay: 0s !important; 
+}
+
+.skillItem.animateIn:hover .iconWrapper {
+  color: #fff;
+  background: var(--accent-gradient);
+  border-color: transparent;
+  box-shadow: 0 12px 25px rgba(59, 130, 246, 0.5);
+  transform: scale(1.1);
+}
+
+.skillItem.animateIn:hover .skillName {
+  color: var(--accent-primary);
+}
+
+
+/* Floating Popover UI */
+.popoverContent {
+  position: fixed;
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 320px;
+  transform: translateX(-50%) scale(0.9);
+  opacity: 0;
+  animation: popoverAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  z-index: 9999;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transform-origin: center top;
+}
+
+.popoverHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.popoverIconBg {
+  width: 45px;
+  height: 45px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.popoverIcon {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  display: flex;
+}
+
+.popoverTitle {
+  font-family: var(--font-syncopate);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.popoverDesc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@keyframes popoverAnim {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
