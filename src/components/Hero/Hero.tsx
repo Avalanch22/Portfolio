@@ -44,6 +44,11 @@ export default function Hero() {
 
   return (
     <section id="hero" className={styles.heroSection}>
+      {/* Background Animated Glows */}
+      <div className={styles.bgGlow1}></div>
+      <div className={styles.bgGlow2}></div>
+      <div className={styles.bgGlow3}></div>
+
       <div className={`container ${styles.heroContainer}`}>
         
         {/* Left Text Content */}
