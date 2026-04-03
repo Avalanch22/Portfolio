@@ -1,6 +1,12 @@
 .projectsSection {
-  padding: 8rem 0;
+  padding: 5rem 0;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .projectsSection {
+    padding: 8rem 0;
+  }
 }
 
 .projectsGrid {
@@ -105,7 +111,7 @@
 
 .projectName {
   font-family: var(--font-syncopate);
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -135,3 +141,22 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 767px) {
+  .projectInfo {
+    padding: 1.5rem;
+  }
+
+  /* Disable the big lift hover on touch screens */
+  .projectCard:hover {
+    transform: translateY(-6px);
+  }
+
+  /* Always show overlay links on touch — users can't hover */
+  .projectOverlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 70%);
+  }
+}
+

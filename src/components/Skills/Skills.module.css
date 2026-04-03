@@ -1,6 +1,12 @@
 .skillsSection {
-  padding: 8rem 0;
-  background-color: var(--bg-primary); 
+  padding: 5rem 0;
+  background-color: var(--bg-primary);
+}
+
+@media (min-width: 768px) {
+  .skillsSection {
+    padding: 8rem 0;
+  }
 }
 
 .skillsGrid {
@@ -8,6 +14,12 @@
   grid-template-columns: 1fr;
   gap: 2rem;
   position: relative;
+}
+
+@media (min-width: 600px) {
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 992px) {
@@ -220,3 +232,45 @@
     transform: translateX(-50%) scale(1);
   }
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 767px) {
+  .cardContent {
+    padding: 1.5rem;
+  }
+
+  .categoryTitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .skillsList {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 1rem;
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .skillName {
+    font-size: 0.75rem;
+  }
+
+  /* Full-width popover on phones so text doesn't overflow */
+  .popoverContent {
+    width: calc(100vw - 32px);
+    left: 50% !important;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  @keyframes popoverAnim {
+    to {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+}
+

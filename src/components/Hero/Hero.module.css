@@ -42,14 +42,14 @@
 
 .title {
   font-family: var(--font-syncopate);
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 8vw, 4rem);
   font-weight: 700;
   margin-bottom: 1rem;
   letter-spacing: -1px;
 }
 
 .role {
-  font-size: 2.5rem;
+  font-size: clamp(1.4rem, 4.5vw, 2.5rem);
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -284,11 +284,77 @@
   .ctaGroup {
     justify-content: center;
   }
-  .title {
-    font-size: 2.5rem;
+}
+
+/* ===== SMALL MOBILE (≤ 480px) ===== */
+@media (max-width: 480px) {
+  .heroSection {
+    padding-top: calc(var(--nav-height) + 1rem);
+    padding-bottom: 5rem;
   }
-  .role {
-    font-size: 1.75rem;
+
+  .heroContainer {
+    gap: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.875rem 1.5rem;
+  }
+
+  /* Fix download button width animation on small screens */
+  .btnDownload {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .downloadAnimating {
+    width: 50px !important;
+    max-width: 50px;
+  }
+
+  .interactiveWrapper {
+    padding: 1rem;
+  }
+
+  .cardBody {
+    padding: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .scrollIndicator {
+    bottom: 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ===== MEDIUM MOBILE (481px – 767px) ===== */
+@media (min-width: 481px) and (max-width: 767px) {
+  .ctaGroup {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 180px;
   }
 }
 

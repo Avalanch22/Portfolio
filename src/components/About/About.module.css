@@ -25,7 +25,8 @@
 
 .stats {
   display: flex;
-  gap: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--glass-border);
@@ -34,11 +35,12 @@
 .statItem {
   display: flex;
   flex-direction: column;
+  min-width: 100px;
 }
 
 .statNum {
   font-family: var(--font-syncopate);
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
   color: var(--accent-primary);
   line-height: 1;
@@ -152,12 +154,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1.5rem;
   background: transparent;
   border: none;
   color: var(--text-primary);
   font-family: var(--font-syncopate);
-  font-size: 1.2rem;
+  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
   font-weight: 700;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -353,4 +355,68 @@
   100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
 }
 
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 767px) {
+  .aboutSection {
+    padding: 2rem 0;
+  }
 
+  .aboutText p {
+    font-size: 1rem;
+  }
+
+  .stats {
+    gap: 1.5rem;
+  }
+
+  /* Scale down the abstract 3D shape decoration */
+  .abstractContainer {
+    height: 280px;
+  }
+
+  .abstractShape1 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .abstractShape2 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .abstractShape3 {
+    width: 90px;
+    height: 90px;
+  }
+
+  /* Education: tighter padding on phone */
+  .educationList {
+    padding: 0 1rem;
+  }
+
+  .expanded {
+    padding: 0.5rem 1rem 1.5rem;
+  }
+
+  /* Disable lateral hover shift — finger can't hover */
+  .educationItem:hover .eduDetails {
+    transform: none;
+  }
+
+  .educationItem {
+    gap: 1rem;
+  }
+
+  .eduDetails {
+    padding: 1rem;
+  }
+
+  .eduDegree {
+    font-size: 0.9rem;
+  }
+
+  .eduMeta {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

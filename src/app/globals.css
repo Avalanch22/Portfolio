@@ -68,12 +68,18 @@ ul {
 
 .section-title {
   font-family: var(--font-syncopate);
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    margin-bottom: 3rem;
+  }
 }
 
 /* Animations */
@@ -100,4 +106,15 @@ ul {
 /* Custom Cursor (optional but adds wow factor) */
 body {
   cursor: default; /* Keep default for now, add custom cursor element later if needed */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Prevent zoom on form inputs on iOS */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* Touch-friendly tap highlights */
+a, button {
+  -webkit-tap-highlight-color: transparent;
 }
