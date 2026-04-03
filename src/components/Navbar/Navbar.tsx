@@ -17,6 +17,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' })
+      history.replaceState(null, '', window.location.pathname)
+    }
+    setIsOpen(false)
+  }
+
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.navContainer}>
@@ -24,10 +33,10 @@ export default function Navbar() {
           B.<span>DAS</span>
         </Link>
         <ul className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
-          <li><Link href="#about" className={styles.navLink} onClick={() => setIsOpen(false)}>About</Link></li>
-          <li><Link href="#skills" className={styles.navLink} onClick={() => setIsOpen(false)}>Skills</Link></li>
-          <li><Link href="#projects" className={styles.navLink} onClick={() => setIsOpen(false)}>Projects</Link></li>
-          <li><Link href="#contact" className={styles.navLink} onClick={() => setIsOpen(false)}>Contact</Link></li>
+          <li><button className={styles.navLink} onClick={() => scrollToSection('about')}>About</button></li>
+          <li><button className={styles.navLink} onClick={() => scrollToSection('skills')}>Skills</button></li>
+          <li><button className={styles.navLink} onClick={() => scrollToSection('projects')}>Projects</button></li>
+          <li><button className={styles.navLink} onClick={() => scrollToSection('contact')}>Contact</button></li>
         </ul>
         <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
           <span className={styles.bar} style={{ transform: isOpen ? 'rotate(-45deg) translate(-5px, 6px)' : 'none' }}></span>

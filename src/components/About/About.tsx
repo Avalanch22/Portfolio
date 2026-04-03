@@ -1,11 +1,18 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FaGraduationCap, FaChevronDown } from 'react-icons/fa6';
 import styles from './About.module.css';
 
 export default function About() {
   const [showEducation, setShowEducation] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null)
+  const [listHeight, setListHeight] = useState(0)
+
+  useEffect(() => {
+    if (!listRef.current) return
+    setListHeight(showEducation ? listRef.current.scrollHeight : 0)
+  }, [showEducation])
 
   return (
     <section id="about" className={styles.aboutSection}>
@@ -55,8 +62,11 @@ export default function About() {
             <FaChevronDown className={`${styles.chevronIcon} ${showEducation ? styles.rotateIcon : ''}`} />
           </button>
 
-          <div className={`${styles.educationContent} ${showEducation ? styles.expanded : ''}`}>
-            <div className={styles.educationList}>
+          <div
+            className={styles.educationContent}
+            style={{ height: `${listHeight}px` }}
+          >
+            <div ref={listRef} className={`${styles.educationList} ${showEducation ? styles.expanded : ''}`}>
               <div className={styles.educationItem}>
                 <div className={styles.eduDot}></div>
                 <div className={styles.eduLine}></div>

@@ -51,11 +51,17 @@ export default function Skills() {
       observer.observe(cardsRef.current)
     }
 
+    // 3. Close popup on scroll (popup position is viewport-relative and stale after scroll)
+    const handleScroll = () => setSelectedSkill(null)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener('scroll', handleScroll)
       observer.disconnect()
     }
   }, [])
+
 
   const handleSkillClick = (tech: Skill, e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()

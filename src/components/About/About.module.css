@@ -129,10 +129,11 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   background: linear-gradient(145deg, rgba(20, 20, 22, 0.6), rgba(10, 10, 12, 0.8));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Only animate border-color, not everything */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
 }
@@ -159,7 +160,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -188,7 +189,7 @@
 .chevronIcon {
   font-size: 1.2rem;
   color: var(--text-secondary);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
 
 .rotateIcon {
@@ -197,13 +198,10 @@
 }
 
 .educationContent {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.expanded {
-  grid-template-rows: 1fr;
+  overflow: hidden;
+  /* Height is driven by JS (scrollHeight) — animating a concrete px value
+     is far cheaper than grid-template-rows which forces full grid relayout each frame */
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .educationList {
@@ -214,7 +212,7 @@
   gap: 2rem;
 }
 
-.expanded .educationList {
+.expanded {
   padding: 0.5rem 2rem 2rem;
 }
 
@@ -223,18 +221,20 @@
   display: flex;
   gap: 2rem;
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease;
+  transform: translateY(16px);
+  /* Specific props only — opacity + transform are GPU-composited, no layout cost */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: transform, opacity;
 }
 
-.expanded .educationItem {
+.expanded > .educationItem {
   opacity: 1;
   transform: translateY(0);
 }
 
-.expanded .educationItem:nth-child(1) { transition-delay: 0.1s; }
-.expanded .educationItem:nth-child(2) { transition-delay: 0.2s; }
-.expanded .educationItem:nth-child(3) { transition-delay: 0.3s; }
+.expanded > .educationItem:nth-child(1) { transition-delay: 0.08s; }
+.expanded > .educationItem:nth-child(2) { transition-delay: 0.16s; }
+.expanded > .educationItem:nth-child(3) { transition-delay: 0.24s; }
 
 .educationItem:last-child .eduLine {
   display: none;
@@ -250,6 +250,12 @@
   position: relative;
   z-index: 2;
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+  /* Only pulse when section is expanded to avoid idle GPU work */
+  animation: none;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.expanded .eduDot {
   animation: pulseDot 3s infinite;
 }
 
@@ -269,13 +275,15 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  /* Specific props only — transform is GPU-composited */
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
 .educationItem:hover .eduDetails {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(59, 130, 246, 0.2);
-  transform: translateX(10px);
+  transform: translateX(8px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
@@ -340,7 +348,9 @@
 }
 
 @keyframes pulseDot {
-  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
-  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
   100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
 }
+
+

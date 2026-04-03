@@ -64,31 +64,71 @@
   text-decoration: none;
   position: relative;
   display: inline-block;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  /* Reset button defaults */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-family: inherit;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.navLink:hover {
-  color: var(--accent-primary);
-  transform: translateY(-3px);
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+/* Glowing pill background */
+.navLink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(139, 92, 246, 0.18));
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: scaleX(0.5) scaleY(0.6);
+  transition: opacity 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: -1;
 }
 
+.navLink:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Shimmer sweep */
 .navLink::after {
   content: '';
   position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--accent-gradient);
-  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border-radius: 2px;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transform: skewX(-15deg);
+  opacity: 0;
+  transition: none;
+  z-index: 1;
 }
 
 .navLink:hover::after {
-  width: 100%;
+  opacity: 1;
+  animation: navShimmer 0.55s ease forwards;
+  animation-delay: 0.15s;
 }
+
+@keyframes navShimmer {
+  from { left: -80%; }
+  to   { left: 140%; }
+}
+
+.navLink:hover {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 14px rgba(59, 130, 246, 0.7);
+}
+
+
 
 .hamburger {
   display: none;

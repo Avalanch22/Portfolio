@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useState, useRef } from 'react'
 import { FaCheck } from 'react-icons/fa'
 import styles from './Hero.module.css'
@@ -60,9 +59,19 @@ export default function Hero() {
             I build responsive, modern, and accessible digital experiences that balance aesthetics and scalable performance.
           </p>
           <div className={`${styles.ctaGroup} fade-up delay-3`}>
-            <Link href="#projects" className={`${styles.btn} ${styles.btnPrimary}`}>
+            <button
+              className={`${styles.btn} ${styles.btnPrimary}`}
+              onClick={() => {
+                const section = document.getElementById('projects')
+                if (section) {
+                  section.scrollIntoView({ behavior: 'smooth' })
+                  // Reset the URL hash so the button always works
+                  history.replaceState(null, '', window.location.pathname)
+                }
+              }}
+            >
               View My Work
-            </Link>
+            </button>
             <a 
               href="/resume.pdf" 
               download 
