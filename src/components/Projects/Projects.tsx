@@ -26,9 +26,9 @@ export default function Projects() {
     },
     {
       id: 3,
-      name: 'Aether AI Interface',
-      description: 'A conversational UI for advanced language models, featuring streaming responses, glassmorphism, and robust session memory.',
-      tech: ['TypeScript', 'WebSockets', 'OpenAI API', 'CSS Modules'],
+      name: 'Code Annotator',
+      description: 'A developer productivity tool providing line-by-line code explanations via a VS Code-like interface. Features drag-and-drop file support and advanced syntax highlighting.',
+      tech: ['Next.js', 'TypeScript', 'Prisma', 'Tailwind CSS', 'Monaco Editor'],
       image: '/projects/project3.png',
       link: '#',
       github: '#'
@@ -40,7 +40,7 @@ export default function Projects() {
       <div className="container py-20 text-center">
         <h2 className="section-title">Featured <span className="gradient-text">Projects</span></h2>
       </div>
-      
+
       {projectsData.map((project, index) => (
         <ScrollExpandMedia
           key={project.id}
@@ -54,7 +54,7 @@ export default function Projects() {
             <p className="text-xl md:text-2xl text-zinc-300 mb-8 max-w-3xl leading-relaxed">
               {project.description}
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {project.tech.map((tech, idx) => (
                 <span key={idx} className="px-4 py-2 rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20">

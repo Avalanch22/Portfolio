@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { FaLinkedinIn, FaGithub, FaCheck } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import { IconBar, IconBarItem } from '@/components/ui/icon-bar'
 import styles from './Contact.module.css'
 
 export default function Contact() {
@@ -69,9 +70,11 @@ export default function Contact() {
             </div>
 
             <div className={styles.socialLinks}>
-              <a href="https://www.linkedin.com/in/bishal-das-82a5bb149/" aria-label="LinkedIn"><FaLinkedinIn /></a>
-              <a href="https://github.com/Avalanch22" aria-label="GitHub"><FaGithub /></a>
-              <a href="https://x.com/BishalD56991929" aria-label="X (Twitter)"><FaXTwitter /></a>
+              <IconBar>
+                <IconBarItem icon={FaLinkedinIn} label="LinkedIn" onClick={() => window.open('https://www.linkedin.com/in/bishal-das-82a5bb149/', '_blank')} />
+                <IconBarItem icon={FaGithub} label="GitHub" onClick={() => window.open('https://github.com/Avalanch22', '_blank')} />
+                <IconBarItem icon={FaXTwitter} label="Twitter" onClick={() => window.open('https://x.com/BishalD56991929', '_blank')} />
+              </IconBar>
             </div>
           </div>
 
