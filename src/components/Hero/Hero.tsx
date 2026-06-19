@@ -2,7 +2,44 @@
 
 import { useState, useRef } from 'react'
 import { FaCheck } from 'react-icons/fa'
+import { Sparkles } from 'lucide-react'
 import styles from './Hero.module.css'
+import { FloatingPaths } from '@/components/ui/background-paths'
+import DisplayCards from '@/components/ui/display-cards'
+import { GooeyText } from '@/components/ui/gooey-text-morphing'
+
+const defaultCards = [
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "Creative Developer",
+    description: "Building immersive digital experiences",
+    date: "Current Focus",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] hover:-translate-y-20 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-zinc-800 before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0a0a0a]/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+  },
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "Software Engineer",
+    description: "Crafting scalable architectures",
+    date: "Professional",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-8 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-zinc-800 before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0a0a0a]/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+  },
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "UI/UX Enthusiast",
+    description: "Designing with purpose and aesthetics",
+    date: "Passion",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-0",
+  },
+];
 
 export default function Hero() {
   const [rotation, setRotation] = useState({ x: 0, y: 0 })
@@ -42,18 +79,35 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className={styles.heroSection}>
-      <div className={`container ${styles.heroContainer}`}>
+    <section id="hero" className={`${styles.heroSection} relative`}>
+      {/* Background Animation */}
+      <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen">
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
+      </div>
+      
+      <div className={`container ${styles.heroContainer} relative z-20`}>
         
         {/* Left Text Content */}
         <div className={styles.heroContent}>
-          <p className={`${styles.subtitle} fade-up`}>
+          <p className={`${styles.subtitle} fade-up delay-1`}>
             <span className={styles.highlight}>Hello, I'm</span>
           </p>
-          <h1 className={`${styles.title} fade-up`}>Bishal Das</h1>
-          <h2 className={`${styles.role} fade-up delay-1`}>
+          <h1 className={`${styles.title} fade-up delay-2`}>Bishal Das</h1>
+          <h2 className={`${styles.role} fade-up delay-3`}>
             Software Engineer <br />
-            & <span className="gradient-text">Creative Developer</span>
+            <span className="flex items-center gap-2 mt-2">
+              & 
+              <span className="relative inline-block h-[1.2em] w-[400px] align-middle">
+                <GooeyText 
+                  texts={["Creative Designer", "UI/UX Enthusiast", "Creative Developer"]} 
+                  textClassName="left-0 top-0 whitespace-nowrap !text-blue-500" 
+                  className="w-full h-full"
+                  morphTime={1}
+                  cooldownTime={3}
+                />
+              </span>
+            </span>
           </h2>
           <p className={`${styles.description} fade-up delay-2`}>
             I build responsive, modern, and accessible digital experiences that balance aesthetics and scalable performance.
@@ -89,50 +143,27 @@ export default function Hero() {
         </div>
         
         {/* Right UI Heavy Interactive Component */}
-        <div className={`${styles.interactiveWrapper} fade-up delay-4`}>
-          <div 
-            ref={cardRef}
-            className={styles.interactiveCard}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-              transition: rotation.x === 0 && rotation.y === 0 ? 'transform 0.5s ease-out' : 'transform 0.1s ease-out'
-            }}
-          >
-            <div className={styles.cardHeader}>
-              <div className={styles.macButtons}>
-                <span></span><span></span><span></span>
-              </div>
-              <div className={styles.cardTitle}>developer.ts</div>
-            </div>
-            
-            <div className={styles.cardBody}>
-              <pre>
-                <code>
-                  <span className={styles.keyword}>const</span> <span className={styles.variable}>profile</span> = {'{'}
-                  {'\n  '}name: <span className={styles.string}>"Bishal Das"</span>,
-                  {'\n  '}role: <span className={styles.string}>"Software Engineer"</span>,
-                  {'\n  '}base: <span className={styles.string}>"Gurugram, India"</span>,
-                  {'\n  '}stack: [<span className={styles.string}>"React"</span>, <span className={styles.string}>"Next.js"</span>],
-                  {'\n  '}passion: <span className={styles.string}>"Building UIs"</span>
-                  {'\n}'};
-                  {'\n\n'}
-                  <span className={styles.keyword}>export default</span> <span className={styles.variable}>profile</span>;
-                </code>
-              </pre>
-            </div>
-            
-            <div className={styles.floatingElement1}></div>
-            <div className={styles.floatingElement2}></div>
-          </div>
+        <div className={`${styles.interactiveWrapper} fade-up delay-4 relative z-10`} style={{ pointerEvents: 'auto' }}>
+          <DisplayCards cards={defaultCards} />
         </div>
 
       </div>
       
-      <div className={`${styles.scrollIndicator} fade-up delay-4`}>
+      <div className={`${styles.scrollIndicator} fade-up delay-4 z-20`}>
         <span>Scroll Down</span>
       </div>
+
+      {/* Bottom Blur/Fade */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[5]"
+        style={{
+          background: 'linear-gradient(to top, #0a0a0a 20%, transparent)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          maskImage: 'linear-gradient(to top, black 10%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to top, black 10%, transparent)'
+        }} 
+      />
     </section>
   )
 }

@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { FaGraduationCap, FaChevronDown } from 'react-icons/fa6';
 import styles from './About.module.css';
+import { SplineScene } from '@/components/ui/splite';
+import { Spotlight } from '@/components/ui/spotlight';
 
 export default function About() {
   const [showEducation, setShowEducation] = useState(false);
@@ -43,10 +45,15 @@ export default function About() {
             </div>
           </div>
 
-          <div className={styles.abstractContainer}>
-            <div className={styles.abstractShape1}></div>
-            <div className={styles.abstractShape2}></div>
-            <div className={styles.abstractShape3}></div>
+          <div className={`${styles.abstractContainer} relative flex items-center justify-center min-h-[400px] overflow-visible`}>
+            <Spotlight
+              className="-top-40 left-0 md:left-20 md:-top-20"
+              fill="white"
+            />
+            <SplineScene 
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full absolute inset-0 z-10"
+            />
           </div>
         </div>
 
