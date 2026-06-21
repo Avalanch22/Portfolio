@@ -27,7 +27,7 @@ const defaultCards = [
     iconClassName: "text-blue-500",
     titleClassName: "text-blue-500",
     className:
-      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-8 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-zinc-800 before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0a0a0a]/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+      "[grid-area:stack] translate-x-6 translate-y-6 sm:translate-x-8 sm:translate-y-8 md:translate-x-12 md:translate-y-10 hover:-translate-y-8 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-zinc-800 before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-[#0a0a0a]/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
   },
   {
     icon: <Sparkles className="size-4 text-blue-300" />,
@@ -37,7 +37,7 @@ const defaultCards = [
     iconClassName: "text-blue-500",
     titleClassName: "text-blue-500",
     className:
-      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-0",
+      "[grid-area:stack] translate-x-12 translate-y-12 sm:translate-x-16 sm:translate-y-16 md:translate-x-24 md:translate-y-20 hover:translate-y-0",
   },
 ];
 
@@ -95,13 +95,13 @@ export default function Hero() {
           </p>
           <h1 className={`${styles.title} fade-up delay-2`}>Bishal Das</h1>
           <h2 className={`${styles.role} fade-up delay-3`}>
-            Software Engineer <br />
-            <span className="flex items-center gap-2 mt-2">
-              & 
-              <span className="relative inline-block h-[1.2em] w-[400px] align-middle">
+            Software Engineer <br className="hidden lg:block" />
+            <span className="flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-2 mt-2">
+              <span className="hidden lg:inline-block">&</span> 
+              <span className="relative inline-block h-[1.2em] w-[260px] sm:w-[320px] md:w-[400px] align-middle">
                 <GooeyText 
                   texts={["Creative Designer", "UI/UX Enthusiast", "Creative Developer"]} 
-                  textClassName="left-0 top-0 whitespace-nowrap !text-blue-500" 
+                  textClassName="left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 top-0 whitespace-nowrap !text-blue-500" 
                   className="w-full h-full"
                   morphTime={1}
                   cooldownTime={3}
@@ -143,7 +143,7 @@ export default function Hero() {
         </div>
         
         {/* Right UI Heavy Interactive Component */}
-        <div className={`${styles.interactiveWrapper} fade-up delay-4 relative z-10`} style={{ pointerEvents: 'auto' }}>
+        <div className={`${styles.interactiveWrapper} fade-up delay-4 relative z-10 pointer-events-auto`}>
           <DisplayCards cards={defaultCards} />
         </div>
 

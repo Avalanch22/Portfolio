@@ -63,13 +63,13 @@ export default function ScrollExpandMedia({
   const textTranslateX = useTransform(
     scrollYProgress, 
     [0, 1], 
-    [0, isMobileState ? 180 : 150]
+    [0, isMobileState ? 40 : 150]
   );
 
   const textTranslateXNegative = useTransform(
     scrollYProgress, 
     [0, 1], 
-    [0, isMobileState ? -180 : -150]
+    [0, isMobileState ? -40 : -150]
   );
 
   const bgOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
@@ -201,18 +201,18 @@ export default function ScrollExpandMedia({
 
             {/* Main Title blending OVER the media */}
             <div
-              className={`flex items-center justify-center text-center gap-4 w-full relative z-10 flex-col ${
+              className={`flex items-center justify-center text-center gap-2 md:gap-4 w-full relative z-10 flex-col px-4 ${
                 textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
               }`}
             >
               <motion.h2
-                className='text-4xl md:text-5xl lg:text-6xl font-bold text-blue-200'
+                className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl'
                 style={{ x: textTranslateXNegative }}
               >
                 {firstWord}
               </motion.h2>
               <motion.h2
-                className='text-4xl md:text-5xl lg:text-6xl font-bold text-center text-blue-200'
+                className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white drop-shadow-2xl'
                 style={{ x: textTranslateX }}
               >
                 {restOfTitle}
